@@ -5,13 +5,14 @@ g(class="bars")
     :transform="`translate(${padding}, ${height - padding})`"
   )
     rect(
-      v-for="bar in calculateDataPosition(chart)"
+      v-for="bar in calculateDataPosition(chart.data)"
       :height="bar.y"
       :stroke-width="0"
+      :style="`fill: ${chart.color}; opacity: 0.5;`"
       :width="barWidth"
-      class="bar"
       :x="bar.x"
       :y="-bar.y"
+      class="bar"
     )
 </template>
 
@@ -21,7 +22,6 @@ export default {
   props: ["height", "padding", "collection", "xWidth", "yHeight", "xValues", "yValues"],
   computed: {
     barWidth() {
-      // let a = this.xWidth / (this.xValues.length - 1);
       return this.xWidth / (this.xValues.length - 1)
     },
   },
@@ -35,13 +35,13 @@ export default {
     yposition(index) {
       return index * (this.yHeight / (this.yValues.length - 1));
     },
-    calculateDataPosition(chart) {
-      return chart.data.map((obj, index) => {
+    calculateDataPosition(data) {
+      return data.map((obj, index) => {
+        const indexX = this.xValues.findIndex((value) => value === obj.x[0])
         const indexY = this.yValues.findIndex((value) => value === obj.y);
 
-        const x = this.xposition(index);
+        const x = this.xposition(indexX);
         const y = this.yposition(indexY);
-
 
         return { x, y };
       });

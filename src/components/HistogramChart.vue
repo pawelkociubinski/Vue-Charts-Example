@@ -38,7 +38,11 @@ import VChartGrid from "./ChartGrid.vue";
 import VChartLabels from "./ChartLabels.vue";
 import VChartSvg from "./ChartSvg.vue";
 
-import { union, range } from "lodash";
+import { union } from "lodash";
+import { pipe, map, flatten, uniq, sort} from "ramda";
+
+const getXvalues = (chart) => map((obj) => obj.x)(chart.data);
+const ascendingValue = (a, b) => a - b;
 
 export default {
   name: "VHistogramChart",
@@ -61,11 +65,12 @@ export default {
   },
   computed: {
     xValues() {
-      return [
-        ...new Set(
-          union(...this.collection.map((chart) => chart.data.map((obj) => obj.x).flat()))
-        )
-      ]
+      return pipe(
+        map(getXvalues),
+        flatten,
+        uniq,
+        sort(ascendingValue)
+      )(this.collection);
     },
     yValues() {
       return [

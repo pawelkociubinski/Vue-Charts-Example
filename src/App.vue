@@ -19,6 +19,18 @@ import VHistogramChart from "./components/HistogramChart.vue";
 import VLineChart from "./components/LineChart.vue";
 
 const histogramChartData = [{
+  color: "blue",
+  data: [{
+    x: [20, 30],
+    y: 1
+  }, {
+    x: [30, 40],
+    y: 3
+  }, {
+    x: [10, 20],
+    y: 5
+  }]
+  }, {
   color: "red",
   data: [{
     x: [0, 10],
