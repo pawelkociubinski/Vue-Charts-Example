@@ -21,7 +21,7 @@
     "eslint": "5.16.0",
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-vue": "5.0.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "sanitize.css": "11.0.0",
     "sass": "1.22.9",
     "sass-loader": "7.1.0",
